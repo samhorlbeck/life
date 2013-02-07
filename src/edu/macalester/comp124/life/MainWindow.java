@@ -19,7 +19,7 @@ import java.text.ParseException;
 public class MainWindow extends JFrame
     implements ActionListener, ChangeListener {
     
-    private static final int RUN_DELAY = 250;
+    private static final int RUN_DELAY = 75; //250 default
 
     private JButton bStep;
     private JToggleButton tbRun;
@@ -49,6 +49,7 @@ public class MainWindow extends JFrame
         
         // create our drawing pane
         pane = new LifeComponent();
+        pane.setForeground(Color.black);
         add(pane, BorderLayout.CENTER);
         
         // set the board
@@ -268,7 +269,7 @@ public class MainWindow extends JFrame
                 board.setRuleSet(new Conway());
             } else {
                 // Uncomment for HighLife
-                // board.setRuleSet(new HighLife());
+                 board.setRuleSet(new HighLife());
             }
         }
     }

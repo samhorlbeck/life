@@ -14,7 +14,7 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class LifeComponent extends JComponent {
         
-    private static final int CELL_SIZE = 5;
+    private static final int CELL_SIZE = 10;
     private static final int GUTTER_SIZE = 1;
     
     private GameBoard board;
@@ -76,9 +76,10 @@ public class LifeComponent extends JComponent {
             dim.height = 400;
         }
         
+        
         setMinimumSize(dim);
         setPreferredSize(dim);
-        
+        this.setForeground(Color.BLACK);
         repaint();
     }
     
@@ -100,7 +101,9 @@ public class LifeComponent extends JComponent {
             g2.fillRect(0, y, bw, GUTTER_SIZE);
         }
         
-        g2.setPaint(Color.BLACK);
+        Color paintColor = Color.white;
+        
+        g2.setPaint(paintColor);
         
         for (int x = 0; x < board.getWidth(); x++) {
             int xpos = cellDistance(x);
@@ -108,6 +111,26 @@ public class LifeComponent extends JComponent {
             for (int y = 0; y < board.getHeight(); y++) {
                 int ypos = cellDistance(y);
                 if (board.getCell(x, y)) {
+                	switch(board.countLivingNeighbors(x, y)){
+                	case 1:
+                		paintColor = Color.red;
+                		break;
+                	case 2:
+                		paintColor = Color.orange;
+                		break;
+                	case 3:
+                		paintColor = Color.yellow;
+                		break;
+                	case 4:
+                		paintColor = Color.green;
+                		break;
+                	case 5:
+                		paintColor = Color.blue;
+                		break;
+                	case 6:
+                		paintColor = Color.magenta;
+                	}
+                	g2.setPaint(paintColor);
                     g2.fillRect(xpos, ypos, CELL_SIZE, CELL_SIZE);
                 }
             }
